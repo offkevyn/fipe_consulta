@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../../shared/util/colors_app.dart';
 import '../../../shared/util/lottie_app.dart';
 import '../../../shared/widget/app_bar/drawer_custom.dart';
 import '../widget/app_bar_home_custom/app_bar_home_custom.dart';
+import '../widget/item_home/item_home.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -15,11 +17,35 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   late final AnimationController _animatioControllerSpeedometer;
+  late final List<ItemHome> _itens;
 
   @override
   void initState() {
     super.initState();
     _animatioControllerSpeedometer = AnimationController(vsync: this);
+
+    _itens = [
+      ItemHome(
+        name: 'Carros',
+        inConstruction: true,
+        onTap: () {},
+        icon: const PhosphorIcon(
+          PhosphorIconsRegular.carProfile,
+          color: ColorsApp.secundary,
+          size: 90,
+        ),
+      ),
+      ItemHome(
+        name: 'Motos',
+        inConstruction: true,
+        onTap: () {},
+        icon: const PhosphorIcon(
+          PhosphorIconsRegular.motorcycle,
+          color: ColorsApp.secundary,
+          size: 90,
+        ),
+      ),
+    ];
   }
 
   @override
@@ -70,13 +96,15 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  const SizedBox(
+                  const SizedBox(height: 50),
+                  SizedBox(
                     width: double.infinity,
-                    child: Center(
-                        child: Text(
-                      "Home",
-                      style: TextStyle(color: Colors.white),
-                    )),
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: 25,
+                      runSpacing: 25,
+                      children: _itens,
+                    ),
                   ),
                   const SizedBox(height: 60),
                 ],
