@@ -28,7 +28,7 @@ class _LookupViewState extends State<LookupView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('Lookup $_lookupType'),
+        child: Text('Lookup ${_lookupType.value}'),
       ),
     );
   }
