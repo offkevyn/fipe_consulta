@@ -1,3 +1,4 @@
+import 'package:fipe_consulta/app/shared/util/helper/string_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../enum/lookup_type_enum.dart';
@@ -28,7 +29,7 @@ class _LookupViewState extends State<LookupView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('Lookup ${_lookupType.value}'),
+        child: Text('Lookup ${_lookupType.value.formatter(capitalize: true)}'),
       ),
     );
   }
