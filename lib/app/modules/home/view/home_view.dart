@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../../shared/util/colors_app.dart';
 import '../../../shared/util/lottie_app.dart';
+import '../../../shared/util/routes_app.dart';
 import '../../../shared/widget/app_bar/drawer_custom.dart';
+import '../../lookup/enum/lookup_type_enum.dart';
 import '../widget/app_bar_home_custom/app_bar_home_custom.dart';
 import '../widget/item_home/item_home.dart';
 
@@ -27,8 +30,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     _itens = [
       ItemHome(
         name: 'Carros',
-        inConstruction: true,
-        onTap: () {},
+        onTap: () {
+          Modular.to.pushNamed('${RoutesApp.Lookup}/', arguments: {
+            'lookupType': LookupTypeEnum.car,
+          });
+        },
         icon: const PhosphorIcon(
           PhosphorIconsRegular.carProfile,
           color: ColorsApp.secundary,
@@ -37,8 +43,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       ),
       ItemHome(
         name: 'Motos',
-        inConstruction: true,
-        onTap: () {},
+        onTap: () {
+          Modular.to.pushNamed('${RoutesApp.Lookup}/', arguments: {
+            'lookupType': LookupTypeEnum.motocycle,
+          });
+        },
         icon: const PhosphorIcon(
           PhosphorIconsRegular.motorcycle,
           color: ColorsApp.secundary,

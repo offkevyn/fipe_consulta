@@ -1,0 +1,4 @@
+enum LookupTypeEnum {
+  car,
+  motocycle,
+}
