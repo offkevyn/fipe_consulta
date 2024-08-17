@@ -27,6 +27,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
         decoration: const BoxDecoration(color: Colors.transparent),
         child: const Icon(
           Icons.arrow_back_ios,
+          color: ColorsApp.secundary,
           size: 40,
         ),
       ),
