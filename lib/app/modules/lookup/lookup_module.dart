@@ -1,11 +1,14 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'enum/lookup_type_enum.dart';
+import 'states/lookup_step_state.dart';
 import 'view/lookup_view.dart';
 
 class LookupModule extends Module {
   @override
-  void binds(i) {}
+  void binds(i) {
+    i.add(LookupStepState.new);
+  }
 
   @override
   void routes(r) {
