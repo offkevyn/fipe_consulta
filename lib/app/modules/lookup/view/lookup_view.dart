@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../shared/util/colors_app.dart';
+import '../../../shared/util/config_view_app.dart';
 import '../../../shared/widget/app_bar/app_bar_custom.dart';
 import '../../../shared/widget/ink_well_custom/ink_well_custom.dart';
 import '../enum/lookup_type_enum.dart';
@@ -27,12 +28,14 @@ class _LookupViewState extends State<LookupView> {
   late LookupStepState _lookupStepState;
 
   late double _heightContent;
+  late final int _millisecondsAnimation;
 
   @override
   void initState() {
     super.initState();
 
     _heightContent = 200;
+    _millisecondsAnimation = 500;
 
     _lookupStepState = Modular.get();
     _lookupStepState.start();
@@ -77,16 +80,17 @@ class _LookupViewState extends State<LookupView> {
     if (state == LookupStepTypeState.step_1_choice_brand) {
       _heightContent = 200;
     } else if (state == LookupStepTypeState.step_2_choice_model_year) {
-      _heightContent = double.infinity;
+      _heightContent = MediaQuery.of(context).size.height - 40;
     } else {
-      _heightContent = 200;
+      _heightContent = 1;
     }
   }
 
   Align _content({required LookupStepTypeState state}) {
     return Align(
-      child: Container(
-        width: double.infinity,
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: _millisecondsAnimation),
+        width: ConfigViewApp.maxWidth,
         height: _heightContent,
         padding: const EdgeInsets.symmetric(
           vertical: 20,
@@ -106,7 +110,7 @@ class _LookupViewState extends State<LookupView> {
                   LookupStepTypeState.step_2_choice_model_year;
             }
           },
-          child: Align(
+          child: Container(
             child: _stateManagement(state: state),
           ),
         ),

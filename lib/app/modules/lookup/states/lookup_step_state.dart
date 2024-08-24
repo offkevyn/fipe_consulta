@@ -3,10 +3,14 @@
 import 'package:flutter/material.dart';
 
 class LookupStepState extends ChangeNotifier {
-  late final ValueNotifier<LookupStepTypeState> state;
+  final ValueNotifier<LookupStepTypeState> state = ValueNotifier(
+    LookupStepTypeState.step_0_initial,
+  );
 
-  void start() {
-    state = ValueNotifier(LookupStepTypeState.step_0_initial);
+  Future start() async {
+    await Future.delayed(const Duration(microseconds: 0));
+
+    state.value = LookupStepTypeState.step_1_choice_brand;
   }
 }
 
