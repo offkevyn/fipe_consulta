@@ -5,9 +5,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../shared/util/colors_app.dart';
 import '../../../shared/util/config_view_app.dart';
 import '../../../shared/widget/app_bar/app_bar_custom.dart';
-import '../../../shared/widget/ink_well_custom/ink_well_custom.dart';
 import '../enum/lookup_type_enum.dart';
 import '../states/lookup_step_state.dart';
+import '../util/type_chosen_lookup.dart';
 import '../widget/steps/step_one/lookup_step_one.dart';
 import '../widget/steps/step_two/lookup_step_two.dart';
 
@@ -25,6 +25,7 @@ class LookupView extends StatefulWidget {
 
 class _LookupViewState extends State<LookupView> {
   late LookupTypeEnum _lookupType;
+  late TypeChosenLookup _typeChosenLookup;
   late LookupStepState _lookupStepState;
 
   late double _heightContent;
@@ -37,6 +38,9 @@ class _LookupViewState extends State<LookupView> {
     _heightContent = 200;
     _millisecondsAnimation = 500;
 
+    _typeChosenLookup = Modular.get();
+    _typeChosenLookup.lookupType = widget.lookupType;
+
     _lookupStepState = Modular.get();
     _lookupStepState.start();
 
@@ -45,6 +49,7 @@ class _LookupViewState extends State<LookupView> {
 
   @override
   void dispose() {
+    // _typeChosenLookup.dispose();
     _lookupStepState.dispose();
 
     super.dispose();
@@ -78,7 +83,7 @@ class _LookupViewState extends State<LookupView> {
 
   void _lookupStepStateListener({required LookupStepTypeState state}) {
     if (state == LookupStepTypeState.step_1_choice_brand) {
-      _heightContent = 200;
+      _heightContent = 300;
     } else if (state == LookupStepTypeState.step_2_choice_model_year) {
       _heightContent = MediaQuery.of(context).size.height - 40;
     } else {
@@ -100,20 +105,7 @@ class _LookupViewState extends State<LookupView> {
           color: ColorsApp.white,
           borderRadius: BorderRadius.circular(30),
         ),
-        child: InkWellCustom(
-          onTap: () {
-            if (state != LookupStepTypeState.step_1_choice_brand) {
-              _lookupStepState.state.value =
-                  LookupStepTypeState.step_1_choice_brand;
-            } else {
-              _lookupStepState.state.value =
-                  LookupStepTypeState.step_2_choice_model_year;
-            }
-          },
-          child: Container(
-            child: _stateManagement(state: state),
-          ),
-        ),
+        child: _stateManagement(state: state),
       ),
     );
   }
