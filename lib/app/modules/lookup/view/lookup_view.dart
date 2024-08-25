@@ -8,8 +8,8 @@ import '../../../shared/widget/app_bar/app_bar_custom.dart';
 import '../../../shared/widget/ink_well_custom/ink_well_custom.dart';
 import '../enum/lookup_type_enum.dart';
 import '../states/lookup_step_state.dart';
-import '../widget/steps/lookup_step_one.dart';
-import '../widget/steps/lookup_step_two.dart';
+import '../widget/steps/step_one/lookup_step_one.dart';
+import '../widget/steps/step_two/lookup_step_two.dart';
 
 class LookupView extends StatefulWidget {
   final LookupTypeEnum lookupType;

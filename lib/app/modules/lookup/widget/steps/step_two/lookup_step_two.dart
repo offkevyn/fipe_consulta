@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../shared/util/colors_app.dart';
+import '../../../../../shared/util/colors_app.dart';
 
 class LookupStepTwo extends StatefulWidget {
   const LookupStepTwo({super.key});
