@@ -7,12 +7,18 @@ class ButtonSimple extends StatelessWidget {
   final String text;
   final double width;
   final double sizeFont;
+  final Color colorFont;
+  final Color colorBackground;
+  final Color colorBorder;
   final void Function()? onPressed;
 
   const ButtonSimple({
     required this.text,
     double? width,
     this.sizeFont = 16,
+    this.colorBorder = ColorsApp.primary,
+    this.colorBackground = ColorsApp.secundary,
+    this.colorFont = ColorsApp.primary,
     this.onPressed,
     super.key,
   }) : width = width ?? 110;
@@ -21,8 +27,8 @@ class ButtonSimple extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWellCustom(
       borderRadius: BorderRadius.circular(5),
-      colorInkWell: ColorsApp.primary.withOpacity(0.09),
-      colorMaterial: ColorsApp.secundary,
+      colorInkWell: colorBorder.withOpacity(0.09),
+      colorMaterial: colorBackground,
       onTap: onPressed,
       child: Container(
         width: width,
@@ -34,7 +40,7 @@ class ButtonSimple extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           color: Colors.transparent,
           border: Border.all(
-            color: ColorsApp.primary,
+            color: colorBorder,
             width: 1.5,
           ),
         ),
@@ -43,7 +49,7 @@ class ButtonSimple extends StatelessWidget {
             text,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: ColorsApp.primary,
+              color: colorFont,
               fontSize: sizeFont,
               fontWeight: FontWeight.w700,
             ),
