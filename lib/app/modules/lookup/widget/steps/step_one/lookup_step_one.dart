@@ -1,4 +1,3 @@
-import 'package:fipe_consulta/app/modules/lookup/widget/steps/step_one/util/most_popular_car_brands.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -7,6 +6,8 @@ import '../../../../../shared/widget/button_simple/button_simple.dart';
 import '../../../../../shared/widget/ink_well_custom/ink_well_custom.dart';
 import '../../../enum/lookup_type_enum.dart';
 import '../../../util/type_chosen_lookup.dart';
+import 'util/most_popular_car_brands.dart';
+import 'util/show_more_dialog/show_more_dialog.dart';
 
 class LookupStepOne extends StatefulWidget {
   const LookupStepOne({super.key});
@@ -56,9 +57,10 @@ class _LookupStepOneState extends State<LookupStepOne> {
           const Text(
             'Escolha a marca:',
             style: TextStyle(
-                fontSize: 24,
-                color: ColorsApp.primary,
-                fontWeight: FontWeight.w700),
+              fontSize: 24,
+              color: ColorsApp.primary,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const SizedBox(height: 25),
           Wrap(
@@ -73,7 +75,12 @@ class _LookupStepOneState extends State<LookupStepOne> {
             colorInkWell: ColorsApp.primary.withOpacity(0.09),
             colorMaterial: Colors.black.withOpacity(0.03),
             onTap: () {
-              print('Clicou em ver mais');
+              ShowMoreDialog.show(
+                context: context,
+                onChanged: (value) {
+                  print('Valor selecionado: $value');
+                },
+              );
             },
             child: Container(
               padding: const EdgeInsets.symmetric(
