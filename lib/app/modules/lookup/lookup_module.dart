@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'enum/lookup_type_enum.dart';
 import 'service/fipe_service.dart';
-import 'states/lookup_step_state.dart';
+import 'state/lookup_step_state.dart';
 import 'util/type_chosen_lookup.dart';
 import 'view/lookup_view.dart';
 import 'widget/steps/step_one/state/search_brands_state.dart';

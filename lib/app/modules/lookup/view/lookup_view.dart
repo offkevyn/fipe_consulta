@@ -6,7 +6,7 @@ import '../../../shared/util/colors_app.dart';
 import '../../../shared/util/config_view_app.dart';
 import '../../../shared/widget/app_bar/app_bar_custom.dart';
 import '../enum/lookup_type_enum.dart';
-import '../states/lookup_step_state.dart';
+import '../state/lookup_step_state.dart';
 import '../util/type_chosen_lookup.dart';
 import '../widget/steps/step_one/lookup_step_one.dart';
 import '../widget/steps/step_two/lookup_step_two.dart';
