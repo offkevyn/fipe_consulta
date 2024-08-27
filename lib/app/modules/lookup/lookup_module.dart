@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'enum/lookup_type_enum.dart';
+import 'service/fipe_service.dart';
 import 'states/lookup_step_state.dart';
 import 'util/type_chosen_lookup.dart';
 import 'view/lookup_view.dart';
@@ -8,7 +10,9 @@ import 'view/lookup_view.dart';
 class LookupModule extends Module {
   @override
   void binds(i) {
+    i.addSingleton(() => Dio());
     i.addSingleton(TypeChosenLookup.new);
+    i.addSingleton(FipeService.new);
     i.add(LookupStepState.new);
   }
 
