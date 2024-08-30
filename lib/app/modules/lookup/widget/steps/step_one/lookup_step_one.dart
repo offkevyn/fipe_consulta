@@ -5,6 +5,7 @@ import '../../../../../shared/util/colors_app.dart';
 import '../../../../../shared/widget/button_simple/button_simple.dart';
 import '../../../../../shared/widget/ink_well_custom/ink_well_custom.dart';
 import '../../../enum/lookup_type_enum.dart';
+import '../../../model/brand.dart';
 import '../../../state/chosen_lookup_state.dart';
 import 'util/most_popular_car_brands.dart';
 import 'util/show_more_dialog/show_more_dialog.dart';
@@ -49,6 +50,10 @@ class _LookupStepOneState extends State<LookupStepOne> {
     return itens;
   }
 
+  _onChosenBrand({required Brand brand}) {
+    print('Brand: ${brand.name}');
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -78,7 +83,7 @@ class _LookupStepOneState extends State<LookupStepOne> {
               ShowMoreDialog.show(
                 context: context,
                 onChanged: (value) {
-                  print('Valor selecionado: $value');
+                  _onChosenBrand(brand: value);
                 },
               );
             },

@@ -11,7 +11,7 @@ import '../../state/search_brands_state.dart';
 abstract class ShowMoreDialog {
   static Future<dynamic> show({
     required BuildContext context,
-    required Function(dynamic) onChanged,
+    required Function(Brand) onChanged,
   }) {
     return showGeneralDialog(
       barrierColor: Colors.black.withOpacity(0.5),
@@ -38,7 +38,7 @@ abstract class ShowMoreDialog {
 }
 
 class DialogShowMoreContent extends StatefulWidget {
-  final Function(dynamic) onChanged;
+  final Function(Brand) onChanged;
 
   const DialogShowMoreContent({
     required this.onChanged,
