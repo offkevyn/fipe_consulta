@@ -1,5 +1,5 @@
 import '../enum/lookup_type_enum.dart';
 
-class TypeChosenLookup {
+class ChosenLookupState {
   late final LookupTypeEnum lookupType;
 }

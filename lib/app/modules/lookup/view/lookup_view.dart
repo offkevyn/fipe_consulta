@@ -6,8 +6,8 @@ import '../../../shared/util/colors_app.dart';
 import '../../../shared/util/config_view_app.dart';
 import '../../../shared/widget/app_bar/app_bar_custom.dart';
 import '../enum/lookup_type_enum.dart';
+import '../state/chosen_lookup_state.dart';
 import '../state/lookup_step_state.dart';
-import '../util/type_chosen_lookup.dart';
 import '../widget/steps/step_one/lookup_step_one.dart';
 import '../widget/steps/step_two/lookup_step_two.dart';
 
@@ -25,7 +25,7 @@ class LookupView extends StatefulWidget {
 
 class _LookupViewState extends State<LookupView> {
   late LookupTypeEnum _lookupType;
-  late TypeChosenLookup _typeChosenLookup;
+  late ChosenLookupState _chosenLookupState;
   late LookupStepState _lookupStepState;
 
   late double _heightContent;
@@ -38,8 +38,8 @@ class _LookupViewState extends State<LookupView> {
     _heightContent = 200;
     _millisecondsAnimation = 500;
 
-    _typeChosenLookup = Modular.get();
-    _typeChosenLookup.lookupType = widget.lookupType;
+    _chosenLookupState = Modular.get();
+    _chosenLookupState.lookupType = widget.lookupType;
 
     _lookupStepState = Modular.get();
     _lookupStepState.start();
@@ -49,7 +49,7 @@ class _LookupViewState extends State<LookupView> {
 
   @override
   void dispose() {
-    // _typeChosenLookup.dispose();
+    // _chosenLookupState.dispose();
     _lookupStepState.dispose();
 
     super.dispose();

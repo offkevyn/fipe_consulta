@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../shared/http/http_url_util.dart';
 import '../enum/lookup_type_enum.dart';
 import '../model/brand.dart';
-import '../util/type_chosen_lookup.dart';
+import '../state/chosen_lookup_state.dart';
 
 class FipeService {
   final Dio dio;
@@ -12,7 +12,7 @@ class FipeService {
   FipeService(this.dio);
 
   String lookupType() {
-    return Modular.get<TypeChosenLookup>().lookupType.value;
+    return Modular.get<ChosenLookupState>().lookupType.value;
   }
 
   Future<List<Brand>> getBrands() async {

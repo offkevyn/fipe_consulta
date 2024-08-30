@@ -5,7 +5,7 @@ import '../../../../../shared/util/colors_app.dart';
 import '../../../../../shared/widget/button_simple/button_simple.dart';
 import '../../../../../shared/widget/ink_well_custom/ink_well_custom.dart';
 import '../../../enum/lookup_type_enum.dart';
-import '../../../util/type_chosen_lookup.dart';
+import '../../../state/chosen_lookup_state.dart';
 import 'util/most_popular_car_brands.dart';
 import 'util/show_more_dialog/show_more_dialog.dart';
 
@@ -17,20 +17,20 @@ class LookupStepOne extends StatefulWidget {
 }
 
 class _LookupStepOneState extends State<LookupStepOne> {
-  late TypeChosenLookup _typeChosenLookup;
+  late ChosenLookupState _chosenLookupState;
 
   @override
   void initState() {
     super.initState();
 
-    _typeChosenLookup = Modular.get();
+    _chosenLookupState = Modular.get();
   }
 
   List<Widget> _itens() {
     List<Widget> itens = [];
     List<dynamic> listVehicle = [];
 
-    if (_typeChosenLookup.lookupType == LookupTypeEnum.car) {
+    if (_chosenLookupState.lookupType == LookupTypeEnum.car) {
       listVehicle = MostPopularCarBrands.brands();
     }
 
