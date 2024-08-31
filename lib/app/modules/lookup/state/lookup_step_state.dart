@@ -12,6 +12,21 @@ class LookupStepState extends ChangeNotifier {
 
     state.value = LookupStepTypeState.step_1_choice_brand;
   }
+
+  void nextStep() {
+    switch (state.value) {
+      case LookupStepTypeState.step_1_choice_brand:
+        state.value = LookupStepTypeState.step_2_choice_model_year;
+        break;
+      case LookupStepTypeState.step_2_choice_model_year:
+        state.value = LookupStepTypeState.step_0_initial;
+        break;
+      default:
+        state.value = LookupStepTypeState.step_0_initial;
+        break;
+    }
+    notifyListeners();
+  }
 }
 
 enum LookupStepTypeState {

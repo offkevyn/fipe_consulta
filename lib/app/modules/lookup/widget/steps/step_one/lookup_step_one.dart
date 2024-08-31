@@ -11,7 +11,11 @@ import 'util/most_popular_car_brands.dart';
 import 'util/show_more_dialog/show_more_dialog.dart';
 
 class LookupStepOne extends StatefulWidget {
-  const LookupStepOne({super.key});
+  final Function onFinished;
+  const LookupStepOne({
+    required this.onFinished,
+    super.key,
+  });
 
   @override
   State<LookupStepOne> createState() => _LookupStepOneState();
@@ -85,6 +89,15 @@ class _LookupStepOneState extends State<LookupStepOne>
         setState(() {
           _animationText = 1.0;
         });
+      });
+
+      Future.delayed(Duration(milliseconds: _durationAnimationContainer + 600),
+          () {
+        setState(() {
+          _animationText = 0.0;
+        });
+
+        widget.onFinished();
       });
     }
   }

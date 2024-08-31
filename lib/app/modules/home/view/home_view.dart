@@ -43,11 +43,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       ),
       ItemHome(
         name: 'Motos',
-        onTap: () {
-          Modular.to.pushNamed('${RoutesApp.Lookup}/', arguments: {
-            'lookupType': LookupTypeEnum.motocycle,
-          });
-        },
+        inConstruction: true,
+        onTap: () {},
         icon: const PhosphorIcon(
           PhosphorIconsRegular.motorcycle,
           color: ColorsApp.secundary,
