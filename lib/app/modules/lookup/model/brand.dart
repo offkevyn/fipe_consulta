@@ -9,6 +9,12 @@ class Brand {
     required this.cod,
   });
 
+  static Brand get empty => Brand(name: '', cod: '');
+
+  bool get isEmpty => name.isEmpty || cod.isEmpty;
+
+  bool get isNotEmpty => name.isNotEmpty && cod.isNotEmpty;
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,

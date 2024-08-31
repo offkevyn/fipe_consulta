@@ -51,65 +51,90 @@ class _LookupStepOneState extends State<LookupStepOne> {
   }
 
   _onChosenBrand({required Brand brand}) {
+    _chosenLookupState.chosenLookup.value = ChosenLookup(brand: brand);
     print('Brand: ${brand.name}');
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const Text(
-            'Escolha a marca:',
-            style: TextStyle(
-              fontSize: 24,
-              color: ColorsApp.primary,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 25),
-          Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 10,
-            runSpacing: 10,
-            children: _itens(),
-          ),
-          const SizedBox(height: 30),
-          InkWellCustom(
-            borderRadius: BorderRadius.circular(50),
-            colorInkWell: ColorsApp.primary.withOpacity(0.09),
-            colorMaterial: Colors.black.withOpacity(0.03),
-            onTap: () {
-              ShowMoreDialog.show(
-                context: context,
-                onChanged: (value) {
-                  _onChosenBrand(brand: value);
-                },
-              );
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 6,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: const Text(
-                'Ver mais',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: ColorsApp.primary2,
-                  fontWeight: FontWeight.w700,
-                  decoration: TextDecoration.underline,
-                  decorationColor: ColorsApp.primary2,
+    return AnimatedBuilder(
+        animation: _chosenLookupState.chosenLookup,
+        builder: (context, _) {
+          Brand brand = _chosenLookupState.chosenLookup.value.brand;
+          if (brand.isNotEmpty) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  brand.name,
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: ColorsApp.primary2,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
+              ],
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Text(
+                    'Escolha a marca:',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: ColorsApp.primary,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: _itens(),
+                  ),
+                  const SizedBox(height: 30),
+                  InkWellCustom(
+                    borderRadius: BorderRadius.circular(50),
+                    colorInkWell: ColorsApp.primary.withOpacity(0.09),
+                    colorMaterial: Colors.black.withOpacity(0.03),
+                    onTap: () {
+                      ShowMoreDialog.show(
+                        context: context,
+                        onChanged: (value) {
+                          _onChosenBrand(brand: value);
+                        },
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: const Text(
+                        'Ver mais',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: ColorsApp.primary2,
+                          fontWeight: FontWeight.w700,
+                          decoration: TextDecoration.underline,
+                          decorationColor: ColorsApp.primary2,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-            ),
-          )
-        ],
-      ),
-    );
+            );
+          }
+        });
   }
 }
