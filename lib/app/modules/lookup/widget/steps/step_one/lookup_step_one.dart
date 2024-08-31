@@ -17,14 +17,28 @@ class LookupStepOne extends StatefulWidget {
   State<LookupStepOne> createState() => _LookupStepOneState();
 }
 
-class _LookupStepOneState extends State<LookupStepOne> {
+class _LookupStepOneState extends State<LookupStepOne>
+    with SingleTickerProviderStateMixin {
   late ChosenLookupState _chosenLookupState;
+
+  late double _animationContainer;
+  late int _durationAnimationContainer;
+  late double _animationText;
+  late int _durationAnimationText;
+
+  late bool _chosenBrand;
 
   @override
   void initState() {
     super.initState();
 
     _chosenLookupState = Modular.get();
+
+    _animationContainer = 1.0;
+    _animationText = 0.0;
+    _durationAnimationContainer = _durationAnimationText = 700;
+
+    _chosenBrand = false;
   }
 
   List<Widget> _itens() {
@@ -41,7 +55,12 @@ class _LookupStepOneState extends State<LookupStepOne> {
           text: e['name'],
           width: e['width'],
           onPressed: () {
-            print('Clicou em ${e['name']}');
+            _onChosenBrand(
+              brand: Brand(
+                name: e['name'],
+                cod: e['cod'],
+              ),
+            );
           },
         ),
       );
@@ -50,91 +69,132 @@ class _LookupStepOneState extends State<LookupStepOne> {
     return itens;
   }
 
-  _onChosenBrand({required Brand brand}) {
-    _chosenLookupState.chosenLookup.value = ChosenLookup(brand: brand);
-    print('Brand: ${brand.name}');
+  Future _onChosenBrand({required Brand brand}) async {
+    if (!_chosenBrand) {
+      _chosenBrand = true;
+      _chosenLookupState.chosenLookup.value = ChosenLookup(brand: brand);
+
+      Future.delayed(const Duration(milliseconds: 100), () {
+        setState(() {
+          _animationContainer = 0.0;
+        });
+      });
+
+      Future.delayed(Duration(milliseconds: _durationAnimationContainer - 250),
+          () {
+        setState(() {
+          _animationText = 1.0;
+        });
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-        animation: _chosenLookupState.chosenLookup,
-        builder: (context, _) {
-          Brand brand = _chosenLookupState.chosenLookup.value.brand;
-          if (brand.isNotEmpty) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  brand.name,
-                  maxLines: 1,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: ColorsApp.primary2,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+      animation: _chosenLookupState.chosenLookup,
+      builder: (context, _) {
+        Brand brand = _chosenLookupState.chosenLookup.value.brand;
+        return SingleChildScrollView(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              AnimatedOpacity(
+                opacity: _animationContainer,
+                duration: Duration(
+                  milliseconds: _durationAnimationContainer,
                 ),
-              ],
-            );
-          } else {
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  const Text(
-                    'Escolha a marca:',
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: ColorsApp.primary,
-                      fontWeight: FontWeight.w700,
-                    ),
+                child: AnimatedScale(
+                  scale: _animationContainer,
+                  duration: Duration(
+                    milliseconds: _durationAnimationContainer,
                   ),
-                  const SizedBox(height: 25),
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 10,
-                    runSpacing: 10,
-                    children: _itens(),
-                  ),
-                  const SizedBox(height: 30),
-                  InkWellCustom(
-                    borderRadius: BorderRadius.circular(50),
-                    colorInkWell: ColorsApp.primary.withOpacity(0.09),
-                    colorMaterial: Colors.black.withOpacity(0.03),
-                    onTap: () {
-                      ShowMoreDialog.show(
-                        context: context,
-                        onChanged: (value) {
-                          _onChosenBrand(brand: value);
-                        },
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: const Text(
-                        'Ver mais',
+                  curve: Curves.easeInOutCirc,
+                  // curve: Curves.easeInOutBack,
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Escolha a marca:',
                         style: TextStyle(
-                          fontSize: 18,
-                          color: ColorsApp.primary2,
+                          fontSize: 24,
+                          color: ColorsApp.primary,
                           fontWeight: FontWeight.w700,
-                          decoration: TextDecoration.underline,
-                          decorationColor: ColorsApp.primary2,
                         ),
                       ),
-                    ),
-                  )
-                ],
+                      const SizedBox(height: 25),
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 10,
+                        runSpacing: 10,
+                        children: _itens(),
+                      ),
+                      const SizedBox(height: 30),
+                      InkWellCustom(
+                        borderRadius: BorderRadius.circular(50),
+                        colorInkWell: ColorsApp.primary.withOpacity(0.09),
+                        colorMaterial: Colors.black.withOpacity(0.03),
+                        onTap: () {
+                          ShowMoreDialog.show(
+                            context: context,
+                            onChanged: (value) {
+                              _onChosenBrand(brand: value);
+                            },
+                          );
+                          // _onChosenBrand(brand: Brand(name: 'Toyotaoff', cod: '123'));
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: const Text(
+                            'Ver mais',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: ColorsApp.primary2,
+                              fontWeight: FontWeight.w700,
+                              decoration: TextDecoration.underline,
+                              decorationColor: ColorsApp.primary2,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
-            );
-          }
-        });
+              AnimatedOpacity(
+                opacity: _animationText,
+                duration: Duration(
+                  milliseconds: _durationAnimationText,
+                ),
+                child: AnimatedScale(
+                  scale: _animationText,
+                  duration: Duration(
+                    milliseconds: _durationAnimationText,
+                  ),
+                  curve: Curves.bounceOut,
+                  child: Text(
+                    brand.name,
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: ColorsApp.primary,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
