@@ -1,25 +1,18 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../shared/http/http_url_util.dart';
-import '../enum/lookup_type_enum.dart';
 import '../model/brand.dart';
-import '../state/chosen_lookup_state.dart';
 
 class FipeService {
   final Dio dio;
 
   FipeService(this.dio);
 
-  String lookupType() {
-    return Modular.get<ChosenLookupState>().lookupType.value;
-  }
-
-  Future<List<Brand>> getBrands() async {
+  Future<List<Brand>> getBrands({required String vehicleType}) async {
     List<Brand> listBrands = [];
 
     var response = await dio.get<List<dynamic>>(
-        HttpUrlUtil.getBrandsUrl(vehicleType: lookupType()),
+        HttpUrlUtil.getBrandsUrl(vehicleType: vehicleType),
         options: Options(headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

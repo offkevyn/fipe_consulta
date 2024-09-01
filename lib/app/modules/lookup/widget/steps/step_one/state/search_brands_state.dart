@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../../../enum/lookup_type_enum.dart';
 import '../../../../model/brand.dart';
 import '../../../../service/fipe_service.dart';
+import '../../../../state/chosen_lookup_state.dart';
 
 class SearchBrandsState extends ChangeNotifier {
   final FipeService fipeService = Modular.get();
@@ -12,12 +14,20 @@ class SearchBrandsState extends ChangeNotifier {
     SearchBrandsTypeState.initial,
   );
 
+  String _lookupType() {
+    return Modular.get<ChosenLookupState>().lookupType.value;
+  }
+
   Future search() async {
     try {
       state.value = SearchBrandsTypeState.loading;
 
       if (listBrands.isEmpty) {
-        await fipeService.getBrands().then((response) {
+        await fipeService
+            .getBrands(
+          vehicleType: _lookupType(),
+        )
+            .then((response) {
           if (response.isEmpty) {
             state.value = SearchBrandsTypeState.empty;
           } else {
