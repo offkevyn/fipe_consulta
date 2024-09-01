@@ -1,6 +1,6 @@
 enum LookupTypeEnum {
   car,
-  motocycle,
+  motorcycle,
 }
 
 extension LookupTypeEnumExtension on LookupTypeEnum {
@@ -8,7 +8,7 @@ extension LookupTypeEnumExtension on LookupTypeEnum {
     switch (this) {
       case LookupTypeEnum.car:
         return 'carros';
-      case LookupTypeEnum.motocycle:
+      case LookupTypeEnum.motorcycle:
         return 'motos';
     }
   }
