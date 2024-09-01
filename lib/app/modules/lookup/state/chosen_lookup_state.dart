@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../enum/lookup_type_enum.dart';
-import '../model/brand.dart';
+import '../model/fipe_default_cls.dart';
 
 class ChosenLookupState extends ChangeNotifier {
   late final LookupTypeEnum lookupType;
@@ -11,9 +11,9 @@ class ChosenLookupState extends ChangeNotifier {
 }
 
 class ChosenLookup {
-  final Brand brand;
+  final FipeDefaultCls brand;
 
   ChosenLookup({required this.brand});
 
-  static ChosenLookup get empty => ChosenLookup(brand: Brand.empty);
+  static ChosenLookup get empty => ChosenLookup(brand: FipeDefaultCls.empty);
 }

@@ -5,13 +5,13 @@ import '../../../../../../../shared/util/colors_app.dart';
 import '../../../../../../../shared/widget/button_simple/button_simple.dart';
 import '../../../../../../../shared/widget/dropdown_search_custom/dropdown_search_custom.dart';
 import '../../../../../../../shared/widget/progress_custom/progress_custom.dart';
-import '../../../../../model/brand.dart';
+import '../../../../../model/fipe_default_cls.dart';
 import '../../state/search_brands_state.dart';
 
 abstract class ShowMoreDialog {
   static Future<dynamic> show({
     required BuildContext context,
-    required Function(Brand) onChanged,
+    required Function(FipeDefaultCls) onChanged,
   }) {
     return showGeneralDialog(
       barrierColor: Colors.black.withOpacity(0.5),
@@ -38,7 +38,7 @@ abstract class ShowMoreDialog {
 }
 
 class DialogShowMoreContent extends StatefulWidget {
-  final Function(Brand) onChanged;
+  final Function(FipeDefaultCls) onChanged;
 
   const DialogShowMoreContent({
     required this.onChanged,
@@ -151,9 +151,9 @@ class _DialogShowMoreContentState extends State<DialogShowMoreContent> {
   }
 
   Widget _success(BuildContext context) {
-    List<Brand> listBrands = _searchBrandsState.listBrands;
+    List<FipeDefaultCls> listBrands = _searchBrandsState.listBrands;
 
-    return DropdownSearchCustom<Brand>(
+    return DropdownSearchCustom<FipeDefaultCls>(
       key: _keyDropdownBrands,
       searchHintText: 'Pesquisar...',
       hintText: 'Marca:',

@@ -5,7 +5,7 @@ import '../../../../../shared/util/colors_app.dart';
 import '../../../../../shared/widget/button_simple/button_simple.dart';
 import '../../../../../shared/widget/ink_well_custom/ink_well_custom.dart';
 import '../../../enum/lookup_type_enum.dart';
-import '../../../model/brand.dart';
+import '../../../model/fipe_default_cls.dart';
 import '../../../state/chosen_lookup_state.dart';
 import 'util/most_popular_car_brands.dart';
 import 'util/show_more_dialog/show_more_dialog.dart';
@@ -60,7 +60,7 @@ class _LookupStepOneState extends State<LookupStepOne>
           width: e['width'],
           onPressed: () {
             _onChosenBrand(
-              brand: Brand(
+              brand: FipeDefaultCls(
                 name: e['name'],
                 cod: e['cod'],
               ),
@@ -73,7 +73,7 @@ class _LookupStepOneState extends State<LookupStepOne>
     return itens;
   }
 
-  Future _onChosenBrand({required Brand brand}) async {
+  Future _onChosenBrand({required FipeDefaultCls brand}) async {
     if (!_chosenBrand) {
       _chosenBrand = true;
       _chosenLookupState.chosenLookup.value = ChosenLookup(brand: brand);
@@ -107,7 +107,7 @@ class _LookupStepOneState extends State<LookupStepOne>
     return AnimatedBuilder(
       animation: _chosenLookupState.chosenLookup,
       builder: (context, _) {
-        Brand brand = _chosenLookupState.chosenLookup.value.brand;
+        FipeDefaultCls brand = _chosenLookupState.chosenLookup.value.brand;
         return SingleChildScrollView(
           child: Stack(
             alignment: Alignment.center,
@@ -153,7 +153,7 @@ class _LookupStepOneState extends State<LookupStepOne>
                               _onChosenBrand(brand: value);
                             },
                           );
-                          // _onChosenBrand(brand: Brand(name: 'Toyotaoff', cod: '123'));
+                          // _onChosenBrand(brand: FipeDefaultCls(name: 'Toyotaoff', cod: '123'));
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(

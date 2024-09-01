@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../enum/lookup_type_enum.dart';
-import '../../../../model/brand.dart';
+import '../../../../model/fipe_default_cls.dart';
 import '../../../../service/fipe_service.dart';
 import '../../../../state/chosen_lookup_state.dart';
 
 class SearchBrandsState extends ChangeNotifier {
   final FipeService fipeService = Modular.get();
-  final List<Brand> listBrands = [];
+  final List<FipeDefaultCls> listBrands = [];
 
   final ValueNotifier<SearchBrandsTypeState> state = ValueNotifier(
     SearchBrandsTypeState.initial,

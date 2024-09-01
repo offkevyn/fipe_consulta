@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 
 import '../../../shared/http/http_url_util.dart';
-import '../model/brand.dart';
+import '../model/fipe_default_cls.dart';
 
 class FipeService {
   final Dio dio;
 
   FipeService(this.dio);
 
-  Future<List<Brand>> getBrands({required String vehicleType}) async {
-    List<Brand> listBrands = [];
+  Future<List<FipeDefaultCls>> getBrands({required String vehicleType}) async {
+    List<FipeDefaultCls> listBrands = [];
 
     var response = await dio.get<List<dynamic>>(
         HttpUrlUtil.getBrandsUrl(vehicleType: vehicleType),
@@ -20,7 +20,7 @@ class FipeService {
 
     if (response.data != null) {
       listBrands = (response.data as List<dynamic>)
-          .map((json) => Brand.fromMapApi(json as Map<String, dynamic>))
+          .map((json) => FipeDefaultCls.fromMapApi(json as Map<String, dynamic>))
           .toList();
     }
 
