@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../../shared/util/colors_app.dart';
+import '../../../shared/util/icon_data_app.dart';
 import '../../../shared/util/lottie_app.dart';
 import '../../../shared/util/routes_app.dart';
 import '../../../shared/widget/app_bar/drawer_custom.dart';
@@ -36,7 +37,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           });
         },
         icon: const PhosphorIcon(
-          PhosphorIconsRegular.carProfile,
+          IconDataApp.car,
           color: ColorsApp.secundary,
           size: 90,
         ),
@@ -46,7 +47,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         inConstruction: true,
         onTap: () {},
         icon: const PhosphorIcon(
-          PhosphorIconsRegular.motorcycle,
+          IconDataApp.motorcycle,
           color: ColorsApp.secundary,
           size: 90,
         ),
