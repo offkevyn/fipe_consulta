@@ -1,3 +1,4 @@
+import 'package:fipe_consulta/app/modules/lookup/model/fipe_default_cls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -76,19 +77,25 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
 
   Widget _success() {
     String brandName = _chosenLookupState.chosenLookup.value.brand.name;
+    List<FipeDefaultCls> listModelsVehicles =
+        _searchVehicleState.listModelsVehicles;
 
-    return ListView(
-      children: [
-        _title(brandName),
-        const Text(
-          'sucesso!!',
-          style: TextStyle(
-            color: ColorsApp.primary,
-            fontSize: 19.5,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
+    return ListView.builder(
+      itemCount: listModelsVehicles.length + 1,
+      itemBuilder: (context, index) {
+        if (index == 0) {
+          return _title(brandName);
+        }
+
+        FipeDefaultCls modelVehicle = listModelsVehicles[index - 1];
+
+        return ListTile(
+          title: Text(modelVehicle.name),
+          onTap: () {
+            print(modelVehicle);
+          },
+        );
+      },
     );
   }
 

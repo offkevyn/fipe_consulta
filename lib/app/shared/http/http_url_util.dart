@@ -4,4 +4,11 @@ abstract class HttpUrlUtil {
   static String getBrandsUrl({required String vehicleType}) {
     return '$urlBase/$vehicleType/marcas';
   }
+
+  static String getModelsVehiclesUrl({
+    required String vehicleType,
+    required String brandCod,
+  }) {
+    return '$urlBase/$vehicleType/marcas/$brandCod/modelos';
+  }
 }

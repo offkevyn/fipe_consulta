@@ -32,7 +32,7 @@ class FipeDefaultCls {
   factory FipeDefaultCls.fromMapApi(Map<String, dynamic> map) {
     return FipeDefaultCls(
       name: map['nome'] as String,
-      cod: map['codigo'] as String,
+      cod: map['codigo'].toString(),
     );
   }
 
