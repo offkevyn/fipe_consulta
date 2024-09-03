@@ -9,6 +9,7 @@ import '../../../../../shared/widget/lottie_custom/lottie_custom.dart';
 import '../../../enum/lookup_type_enum.dart';
 import '../../../state/chosen_lookup_state.dart';
 import 'state/search_vehicle_state.dart';
+import 'widget/item_list/item_list.dart';
 
 class LookupStepTwo extends StatefulWidget {
   const LookupStepTwo({super.key});
@@ -80,21 +81,24 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
     List<FipeDefaultCls> listModelsVehicles =
         _searchVehicleState.listModelsVehicles;
 
-    return ListView.builder(
+    return ListView.separated(
       itemCount: listModelsVehicles.length + 1,
+      separatorBuilder: (context, index) {
+        return const SizedBox(height: 15);
+      },
       itemBuilder: (context, index) {
         if (index == 0) {
           return _title(brandName);
+        } else {
+          FipeDefaultCls modelVehicle = listModelsVehicles[index - 1];
+
+          return ItemList(
+            title: modelVehicle.name,
+            onTap: () {
+              print(modelVehicle);
+            },
+          );
         }
-
-        FipeDefaultCls modelVehicle = listModelsVehicles[index - 1];
-
-        return ListTile(
-          title: Text(modelVehicle.name),
-          onTap: () {
-            print(modelVehicle);
-          },
-        );
       },
     );
   }
