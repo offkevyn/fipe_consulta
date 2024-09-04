@@ -87,10 +87,9 @@ class _ItemListState extends State<ItemList> {
                     widget.title,
                     maxLines: 1,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: ColorsApp.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      decoration: TextDecoration.underline,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
