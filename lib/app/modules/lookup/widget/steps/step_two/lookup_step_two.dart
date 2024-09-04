@@ -1,4 +1,3 @@
-import 'package:fipe_consulta/app/modules/lookup/model/fipe_default_cls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -7,6 +6,7 @@ import '../../../../../shared/util/colors_app.dart';
 import '../../../../../shared/util/icon_data_app.dart';
 import '../../../../../shared/widget/lottie_custom/lottie_custom.dart';
 import '../../../enum/lookup_type_enum.dart';
+import '../../../model/fipe_default_cls.dart';
 import '../../../state/chosen_lookup_state.dart';
 import 'state/search_vehicle_state.dart';
 import 'widget/item_list/item_list.dart';
@@ -22,6 +22,8 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
   late ChosenLookupState _chosenLookupState;
   late SearchVehicleState _searchVehicleState;
 
+  late bool _startAnimation;
+
   @override
   void initState() {
     super.initState();
@@ -29,6 +31,8 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
     _chosenLookupState = Modular.get();
     _searchVehicleState = Modular.get();
     _searchVehicleState.search();
+
+    _startAnimation = true;
   }
 
   @override
@@ -81,12 +85,17 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
     List<FipeDefaultCls> listModelsVehicles =
         _searchVehicleState.listModelsVehicles;
 
+    int numAnimation = MediaQuery.of(context).size.height ~/ 75;
+
     return ListView.separated(
       itemCount: listModelsVehicles.length + 1,
       separatorBuilder: (context, index) {
         return const SizedBox(height: 15);
       },
       itemBuilder: (context, index) {
+        if (index >= numAnimation + 1) {
+          _startAnimation = false;
+        }
         if (index == 0) {
           return _title(brandName);
         } else {
@@ -94,6 +103,8 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
 
           return ItemList(
             title: modelVehicle.name,
+            index:
+                index - 1 < numAnimation && _startAnimation ? index - 1 : null,
             onTap: () {
               print(modelVehicle);
             },

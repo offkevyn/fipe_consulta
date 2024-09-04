@@ -6,28 +6,58 @@ import '../../../../../../../shared/util/config_view_app.dart';
 import '../../../../../../../shared/util/icon_data_app.dart';
 import '../../../../../../../shared/widget/ink_well_custom/ink_well_custom.dart';
 
-class ItemList extends StatelessWidget {
+class ItemList extends StatefulWidget {
   final String title;
   final Function() onTap;
+  final int? index;
 
   const ItemList({
     required this.title,
     required this.onTap,
+    this.index,
     super.key,
   });
 
   @override
+  State<ItemList> createState() => _ItemListState();
+}
+
+class _ItemListState extends State<ItemList> {
+  late final bool _withAnimation;
+  late final int? _index;
+  late double _width;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _withAnimation = widget.index != null;
+    _index = widget.index;
+    _width = 0;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(milliseconds: 200), () {
+      setState(() {
+        _width = ConfigViewApp.isLargeWidth(context) ? 400 : 300;
+      });
+    });
+
+    int duration = _withAnimation ? 300 + (_index! * 100) : 0;
+
     return Align(
       alignment: Alignment.topRight,
       child: InkWellCustom(
-        onTap: onTap,
+        onTap: widget.onTap,
         borderRadius: BorderRadius.circular(25),
         colorMaterial: ColorsApp.primary,
         colorInkWell: ColorsApp.primary2.withOpacity(0.3),
-        child: Container(
+        child: AnimatedContainer(
           height: 60,
-          width: ConfigViewApp.isLargeWidth(context) ? 400 : 300,
+          width: _width,
+          curve: Curves.easeInOut,
+          duration: Duration(milliseconds: duration),
           padding: const EdgeInsets.symmetric(
             horizontal: 10,
             vertical: 0,
@@ -54,7 +84,7 @@ class ItemList extends StatelessWidget {
                     vertical: 0,
                   ),
                   child: Text(
-                    title,
+                    widget.title,
                     maxLines: 1,
                     style: const TextStyle(
                       color: Colors.white,
