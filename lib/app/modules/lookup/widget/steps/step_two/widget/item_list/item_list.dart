@@ -27,6 +27,9 @@ class _ItemListState extends State<ItemList> {
   late final int? _index;
   late double _width;
 
+  late bool _isMonted;
+  late bool _animated;
+
   @override
   void initState() {
     super.initState();
@@ -34,17 +37,34 @@ class _ItemListState extends State<ItemList> {
     _withAnimation = widget.index != null;
     _index = widget.index;
     _width = 0;
+
+    _isMonted = true;
+    _animated = false;
+  }
+
+  @override
+  void dispose() {
+    _isMonted = false;
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 200), () {
-      setState(() {
-        _width = ConfigViewApp.isLargeWidth(context) ? 400 : 300;
-      });
-    });
-
+    double widthDefault = ConfigViewApp.isLargeWidth(context) ? 400 : 300;
     int duration = _withAnimation ? 300 + (_index! * 100) : 0;
+
+    if (_withAnimation) {
+      Future.delayed(const Duration(milliseconds: 200), () {
+        if (_isMonted && !_animated) {
+          setState(() {
+            _width = widthDefault;
+          });
+          _animated = true;
+        }
+      });
+    } else {
+      _width = widthDefault;
+    }
 
     return Align(
       alignment: Alignment.topRight,
