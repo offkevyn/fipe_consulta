@@ -67,6 +67,16 @@ class _LookupViewState extends State<LookupView> {
       appBar: AppBarCustom(
         title: _lookupType.value.formatter(capitalize: true),
         buttonPagePop: true,
+        onTapPop: () {
+          if (_lookupStepState.state.value !=
+                  LookupStepTypeState.step_1_choice_brand &&
+              _lookupStepState.state.value !=
+                  LookupStepTypeState.step_0_initial) {
+            _lookupStepState.previousStep();
+          } else {
+            Modular.to.pop();
+          }
+        },
       ),
       body: Container(
         width: double.infinity,

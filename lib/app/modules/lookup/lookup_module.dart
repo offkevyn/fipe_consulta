@@ -17,7 +17,7 @@ class LookupModule extends Module {
     i.addSingleton(FipeService.new);
     i.addSingleton(SearchBrandsState.new);
     i.addSingleton(SearchVehicleState.new);
-    i.add(LookupStepState.new);
+    i.addSingleton(LookupStepState.new);
   }
 
   @override

@@ -8,6 +8,7 @@ import '../../../../../shared/widget/lottie_custom/lottie_custom.dart';
 import '../../../enum/lookup_type_enum.dart';
 import '../../../model/fipe_default_cls.dart';
 import '../../../state/chosen_lookup_state.dart';
+import '../../../state/lookup_step_state.dart';
 import 'state/search_vehicle_state.dart';
 import 'widget/item_list/item_list.dart';
 
@@ -19,6 +20,7 @@ class LookupStepTwo extends StatefulWidget {
 }
 
 class _LookupStepTwoState extends State<LookupStepTwo> {
+  late LookupStepState _lookupStepState;
   late ChosenLookupState _chosenLookupState;
   late SearchVehicleState _searchVehicleState;
 
@@ -28,6 +30,7 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
   void initState() {
     super.initState();
 
+    _lookupStepState = Modular.get();
     _chosenLookupState = Modular.get();
     _searchVehicleState = Modular.get();
     _searchVehicleState.search();
@@ -37,19 +40,25 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 0,
-        horizontal: 10,
-      ),
-      child: Center(
-        child: AnimatedBuilder(
-          animation: _searchVehicleState.state,
-          builder: (context, _) {
-            return _stateManagement(
-              state: _searchVehicleState.state.value,
-            );
-          },
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (_) {
+        _lookupStepState.previousStep();
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 0,
+          horizontal: 10,
+        ),
+        child: Center(
+          child: AnimatedBuilder(
+            animation: _searchVehicleState.state,
+            builder: (context, _) {
+              return _stateManagement(
+                state: _searchVehicleState.state.value,
+              );
+            },
+          ),
         ),
       ),
     );
