@@ -28,6 +28,7 @@ class SearchVehicleState extends ChangeNotifier {
         if (response.isEmpty) {
           state.value = SearchVehicleTypeState.empty;
         } else {
+          listModelsVehicles.clear();
           listModelsVehicles.addAll(response);
           state.value = SearchVehicleTypeState.success;
         }
