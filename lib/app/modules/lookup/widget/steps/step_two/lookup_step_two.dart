@@ -9,7 +9,7 @@ import '../../../enum/lookup_type_enum.dart';
 import '../../../model/fipe_default_cls.dart';
 import '../../../state/chosen_lookup_state.dart';
 import '../../../state/lookup_step_state.dart';
-import 'state/search_vehicle_state.dart';
+import 'state/search_models_vehicle_state.dart';
 import 'widget/item_list/item_list.dart';
 
 class LookupStepTwo extends StatefulWidget {
@@ -22,7 +22,7 @@ class LookupStepTwo extends StatefulWidget {
 class _LookupStepTwoState extends State<LookupStepTwo> {
   late LookupStepState _lookupStepState;
   late ChosenLookupState _chosenLookupState;
-  late SearchVehicleState _searchVehicleState;
+  late SearchModelsVehicleState _searchVehicleState;
 
   late bool _startAnimation;
 
@@ -64,23 +64,23 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
     );
   }
 
-  Widget _stateManagement({required SearchVehicleTypeState state}) {
+  Widget _stateManagement({required SearchModelsVehicleTypeState state}) {
     switch (state) {
-      case SearchVehicleTypeState.loading:
+      case SearchModelsVehicleTypeState.loading:
         return const LottieCustom(
           lottieType: LottieType.loading,
         );
-      case SearchVehicleTypeState.error:
+      case SearchModelsVehicleTypeState.error:
         return LottieCustom(
           lottieType: LottieType.failed,
           onPressed: _refresh,
         );
-      case SearchVehicleTypeState.empty:
+      case SearchModelsVehicleTypeState.empty:
         return LottieCustom(
           lottieType: LottieType.empty,
           onPressed: _refresh,
         );
-      case SearchVehicleTypeState.success:
+      case SearchModelsVehicleTypeState.success:
         return _success();
       default:
         return const LottieCustom(

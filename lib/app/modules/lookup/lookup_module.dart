@@ -7,7 +7,7 @@ import 'state/chosen_lookup_state.dart';
 import 'state/lookup_step_state.dart';
 import 'view/lookup_view.dart';
 import 'widget/steps/step_one/state/search_brands_state.dart';
-import 'widget/steps/step_two/state/search_vehicle_state.dart';
+import 'widget/steps/step_two/state/search_models_vehicle_state.dart';
 
 class LookupModule extends Module {
   @override
@@ -16,7 +16,7 @@ class LookupModule extends Module {
     i.addSingleton(ChosenLookupState.new);
     i.addSingleton(FipeService.new);
     i.addSingleton(SearchBrandsState.new);
-    i.addSingleton(SearchVehicleState.new);
+    i.addSingleton(SearchModelsVehicleState.new);
     i.addSingleton(LookupStepState.new);
   }
 

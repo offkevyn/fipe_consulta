@@ -6,18 +6,18 @@ import '../../../../model/fipe_default_cls.dart';
 import '../../../../service/fipe_service.dart';
 import '../../../../state/chosen_lookup_state.dart';
 
-class SearchVehicleState extends ChangeNotifier {
+class SearchModelsVehicleState extends ChangeNotifier {
   final FipeService fipeService = Modular.get();
   final ChosenLookupState chosenLookupState = Modular.get();
   final List<FipeDefaultCls> listModelsVehicles = [];
 
-  final ValueNotifier<SearchVehicleTypeState> state = ValueNotifier(
-    SearchVehicleTypeState.initial,
+  final ValueNotifier<SearchModelsVehicleTypeState> state = ValueNotifier(
+    SearchModelsVehicleTypeState.initial,
   );
 
   Future search() async {
     try {
-      state.value = SearchVehicleTypeState.loading;
+      state.value = SearchModelsVehicleTypeState.loading;
 
       await fipeService
           .getModelsVehicles(
@@ -26,15 +26,15 @@ class SearchVehicleState extends ChangeNotifier {
       )
           .then((response) {
         if (response.isEmpty) {
-          state.value = SearchVehicleTypeState.empty;
+          state.value = SearchModelsVehicleTypeState.empty;
         } else {
           listModelsVehicles.clear();
           listModelsVehicles.addAll(response);
-          state.value = SearchVehicleTypeState.success;
+          state.value = SearchModelsVehicleTypeState.success;
         }
       });
     } catch (e) {
-      state.value = SearchVehicleTypeState.error;
+      state.value = SearchModelsVehicleTypeState.error;
     }
   }
 
@@ -43,7 +43,7 @@ class SearchVehicleState extends ChangeNotifier {
   }
 }
 
-enum SearchVehicleTypeState {
+enum SearchModelsVehicleTypeState {
   initial,
   loading,
   success,
