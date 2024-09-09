@@ -11,9 +11,16 @@ class ChosenLookupState extends ChangeNotifier {
 }
 
 class ChosenLookup {
-  final FipeDefaultCls brand;
+  FipeDefaultCls brand;
+  FipeDefaultCls model;
 
-  ChosenLookup({required this.brand});
+  ChosenLookup({
+    required this.brand,
+    required this.model,
+  });
 
-  static ChosenLookup get empty => ChosenLookup(brand: FipeDefaultCls.empty);
+  static ChosenLookup get empty => ChosenLookup(
+        brand: FipeDefaultCls.empty,
+        model: FipeDefaultCls.empty,
+      );
 }

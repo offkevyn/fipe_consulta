@@ -11,4 +11,12 @@ abstract class HttpUrlUtil {
   }) {
     return '$urlBase/$vehicleType/marcas/$brandCod/modelos';
   }
+
+  static String getYearsVehiclesUrl({
+    required String vehicleType,
+    required String brandCod,
+    required String modelCod,
+  }) {
+    return '$urlBase/$vehicleType/marcas/$brandCod/modelos/$modelCod/anos';
+  }
 }

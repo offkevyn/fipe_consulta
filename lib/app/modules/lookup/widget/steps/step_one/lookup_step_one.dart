@@ -76,7 +76,7 @@ class _LookupStepOneState extends State<LookupStepOne>
   Future _onChosenBrand({required FipeDefaultCls brand}) async {
     if (!_chosenBrand) {
       _chosenBrand = true;
-      _chosenLookupState.chosenLookup.value = ChosenLookup(brand: brand);
+      _chosenLookupState.chosenLookup.value = ChosenLookup.empty..brand = brand;
 
       Future.delayed(const Duration(milliseconds: 100), () {
         setState(() {

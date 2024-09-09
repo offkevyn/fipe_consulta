@@ -24,7 +24,7 @@ class ItemList extends StatefulWidget {
 }
 
 class _ItemListState extends State<ItemList> {
-  late final bool _withAnimation;
+  late bool _withAnimation;
   late final int? _index;
   late double _width;
 
@@ -34,6 +34,8 @@ class _ItemListState extends State<ItemList> {
   late int _duration;
 
   late bool _isOpened;
+
+  late bool _wasClicked;
 
   @override
   void initState() {
@@ -49,6 +51,7 @@ class _ItemListState extends State<ItemList> {
     _duration = _withAnimation ? 300 + (_index! * 100) : 0;
 
     _isOpened = false;
+    _wasClicked = false;
   }
 
   @override
@@ -73,6 +76,7 @@ class _ItemListState extends State<ItemList> {
       Future.delayed(Duration(milliseconds: _duration + 1000), () {
         if (_isMonted) {
           setState(() {
+            _withAnimation = false;
             _animated = true;
           });
         }
@@ -88,7 +92,7 @@ class _ItemListState extends State<ItemList> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           _item(),
-          _animated
+          _animated && _wasClicked
               ? SubItems(
                   isOpened: _isOpened,
                 )
@@ -104,6 +108,7 @@ class _ItemListState extends State<ItemList> {
         widget.onTap();
 
         setState(() {
+          _wasClicked = true;
           _isOpened = !_isOpened;
         });
       },

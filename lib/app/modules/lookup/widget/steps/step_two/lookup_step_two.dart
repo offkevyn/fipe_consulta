@@ -38,6 +38,10 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
     _startAnimation = true;
   }
 
+  void _onChosenModelVehicle({required FipeDefaultCls modelVehicle}) {
+    _chosenLookupState.chosenLookup.value.model = modelVehicle;
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -115,7 +119,9 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
             index:
                 index - 1 < numAnimation && _startAnimation ? index - 1 : null,
             onTap: () {
-              print(modelVehicle);
+              _onChosenModelVehicle(
+                modelVehicle: modelVehicle,
+              );
             },
           );
         }

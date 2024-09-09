@@ -6,45 +6,48 @@ import '../../../../model/fipe_default_cls.dart';
 import '../../../../service/fipe_service.dart';
 import '../../../../state/chosen_lookup_state.dart';
 
-class SearchModelsVehicleState extends ChangeNotifier {
+class SearchYearsVehicleState extends ChangeNotifier {
   final FipeService fipeService = Modular.get();
   final ChosenLookupState chosenLookupState = Modular.get();
-  final List<FipeDefaultCls> listModelsVehicles = [];
+  final List<FipeDefaultCls> listYearsVehicles = [];
 
-  final ValueNotifier<SearchModelsVehicleTypeState> state = ValueNotifier(
-    SearchModelsVehicleTypeState.initial,
+  final ValueNotifier<SearchYearsVehicleTypeState> state = ValueNotifier(
+    SearchYearsVehicleTypeState.initial,
   );
 
   Future search() async {
     try {
-      state.value = SearchModelsVehicleTypeState.loading;
+      state.value = SearchYearsVehicleTypeState.loading;
+
+      await Future.delayed(const Duration(seconds: 1));
 
       await fipeService
-          .getModelsVehicles(
+          .getYearsVehicles(
         vehicleType: chosenLookupState.lookupType.value,
         brandCod: chosenLookupState.chosenLookup.value.brand.cod,
+        modelCod: chosenLookupState.chosenLookup.value.model.cod,
       )
           .then((response) {
         if (response.isEmpty) {
-          state.value = SearchModelsVehicleTypeState.empty;
+          state.value = SearchYearsVehicleTypeState.empty;
         } else {
-          listModelsVehicles.clear();
-          listModelsVehicles.addAll(response);
-          state.value = SearchModelsVehicleTypeState.success;
+          listYearsVehicles.clear();
+          listYearsVehicles.addAll(response);
+          state.value = SearchYearsVehicleTypeState.success;
         }
       });
     } catch (e) {
-      state.value = SearchModelsVehicleTypeState.error;
+      state.value = SearchYearsVehicleTypeState.error;
     }
   }
 
   Future refresh() async {
-    listModelsVehicles.clear();
+    listYearsVehicles.clear();
     await search();
   }
 }
 
-enum SearchModelsVehicleTypeState {
+enum SearchYearsVehicleTypeState {
   initial,
   loading,
   success,

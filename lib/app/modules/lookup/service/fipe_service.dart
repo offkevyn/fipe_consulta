@@ -53,4 +53,40 @@ class FipeService {
 
     return listModels;
   }
+
+  Future<List<FipeDefaultCls>> getYearsVehicles({
+    required String vehicleType,
+    required String brandCod,
+    required String modelCod,
+  }) async {
+    List<FipeDefaultCls> listYears = [];
+
+    var url = HttpUrlUtil.getYearsVehiclesUrl(
+      vehicleType: vehicleType,
+      brandCod: brandCod,
+      modelCod: modelCod,
+    );
+
+    print(url);
+
+    var response = await dio.get<List<dynamic>>(
+        HttpUrlUtil.getYearsVehiclesUrl(
+          vehicleType: vehicleType,
+          brandCod: brandCod,
+          modelCod: modelCod,
+        ),
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        }));
+
+    if (response.data != null) {
+      listYears = (response.data as List<dynamic>)
+          .map(
+              (json) => FipeDefaultCls.fromMapApi(json as Map<String, dynamic>))
+          .toList();
+    }
+
+    return listYears;
+  }
 }
