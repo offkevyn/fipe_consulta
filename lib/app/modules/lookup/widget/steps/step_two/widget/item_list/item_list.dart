@@ -9,11 +9,13 @@ import 'sub_items.dart';
 
 class ItemList extends StatefulWidget {
   final String title;
+  final bool isFocused;
   final Function() onTap;
   final int? index;
 
   const ItemList({
     required this.title,
+    this.isFocused = false,
     required this.onTap,
     this.index,
     super.key,
@@ -24,6 +26,8 @@ class ItemList extends StatefulWidget {
 }
 
 class _ItemListState extends State<ItemList> {
+  late String _title;
+
   late bool _withAnimation;
   late final int? _index;
   late double _width;
@@ -37,9 +41,13 @@ class _ItemListState extends State<ItemList> {
 
   late bool _wasClicked;
 
+  late bool _isFocused;
+
   @override
   void initState() {
     super.initState();
+
+    _title = widget.title;
 
     _withAnimation = widget.index != null;
     _index = widget.index;
@@ -52,6 +60,8 @@ class _ItemListState extends State<ItemList> {
 
     _isOpened = false;
     _wasClicked = false;
+
+    _isFocused = widget.isFocused;
   }
 
   @override
@@ -63,6 +73,10 @@ class _ItemListState extends State<ItemList> {
   @override
   Widget build(BuildContext context) {
     double widthDefault = ConfigViewApp.isLargeWidth(context) ? 400 : 300;
+    _isFocused = widget.isFocused;
+    if (!_isFocused) {
+      _isOpened = false;
+    }
 
     if (_withAnimation) {
       Future.delayed(const Duration(milliseconds: 200), () {
@@ -94,7 +108,7 @@ class _ItemListState extends State<ItemList> {
           _item(),
           _animated && _wasClicked
               ? SubItems(
-                  isOpened: _isOpened,
+                  isOpened: _isOpened && _isFocused,
                 )
               : Container(),
         ],
@@ -146,7 +160,7 @@ class _ItemListState extends State<ItemList> {
                   vertical: 0,
                 ),
                 child: Text(
-                  widget.title,
+                  _title,
                   maxLines: 1,
                   style: const TextStyle(
                     color: ColorsApp.white,

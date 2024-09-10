@@ -26,6 +26,8 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
 
   late bool _startAnimation;
 
+  late FipeDefaultCls _modelVehicleSelected;
+
   @override
   void initState() {
     super.initState();
@@ -36,10 +38,16 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
     _searchVehicleState.search();
 
     _startAnimation = true;
+
+    _modelVehicleSelected = FipeDefaultCls.empty;
   }
 
   void _onChosenModelVehicle({required FipeDefaultCls modelVehicle}) {
     _chosenLookupState.chosenLookup.value.model = modelVehicle;
+
+    setState(() {
+      _modelVehicleSelected = _chosenLookupState.chosenLookup.value.model;
+    });
   }
 
   @override
@@ -116,6 +124,7 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
 
           return ItemList(
             title: modelVehicle.name,
+            isFocused: _modelVehicleSelected == modelVehicle,
             index:
                 index - 1 < numAnimation && _startAnimation ? index - 1 : null,
             onTap: () {
