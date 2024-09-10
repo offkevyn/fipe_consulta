@@ -6,8 +6,9 @@ import '../model/fipe_default_cls.dart';
 class ChosenLookupState extends ChangeNotifier {
   late final LookupTypeEnum lookupType;
 
-  final ValueNotifier<ChosenLookup> chosenLookup =
-      ValueNotifier(ChosenLookup.empty);
+  final ValueNotifier<ChosenLookup> chosenLookup = ValueNotifier(
+    ChosenLookup.empty,
+  );
 }
 
 class ChosenLookup {

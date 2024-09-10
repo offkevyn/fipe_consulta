@@ -61,14 +61,6 @@ class FipeService {
   }) async {
     List<FipeDefaultCls> listYears = [];
 
-    var url = HttpUrlUtil.getYearsVehiclesUrl(
-      vehicleType: vehicleType,
-      brandCod: brandCod,
-      modelCod: modelCod,
-    );
-
-    print(url);
-
     var response = await dio.get<List<dynamic>>(
         HttpUrlUtil.getYearsVehiclesUrl(
           vehicleType: vehicleType,
