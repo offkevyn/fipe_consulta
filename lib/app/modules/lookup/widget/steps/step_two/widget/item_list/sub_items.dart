@@ -142,7 +142,7 @@ class _SubItemsState extends State<SubItems> {
         _searchYearsVehicleState.listYearsVehicles;
 
     return ListView.builder(
-      itemCount: _isOpened ? listYearsVehicles.length : 0,
+      itemCount: listYearsVehicles.length,
       itemBuilder: (context, index) {
         return ListTile(
           title: Text(listYearsVehicles[index].name),
