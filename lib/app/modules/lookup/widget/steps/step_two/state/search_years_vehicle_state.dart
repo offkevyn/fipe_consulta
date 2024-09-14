@@ -19,6 +19,8 @@ class SearchYearsVehicleState extends ChangeNotifier {
     try {
       state.value = SearchYearsVehicleTypeState.loading;
 
+      listYearsVehicles.clear();
+
       await Future.delayed(const Duration(seconds: 1));
 
       await fipeService
@@ -31,7 +33,6 @@ class SearchYearsVehicleState extends ChangeNotifier {
         if (response.isEmpty) {
           state.value = SearchYearsVehicleTypeState.empty;
         } else {
-          listYearsVehicles.clear();
           listYearsVehicles.addAll(response);
           state.value = SearchYearsVehicleTypeState.success;
         }

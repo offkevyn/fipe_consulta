@@ -8,9 +8,11 @@ import '../../../../../model/fipe_default_cls.dart';
 import '../../state/search_years_vehicle_state.dart';
 
 class SubItems extends StatefulWidget {
+  final FipeDefaultCls modelVehicle;
   final bool isOpened;
 
   const SubItems({
+    required this.modelVehicle,
     required this.isOpened,
     super.key,
   });
@@ -40,6 +42,7 @@ class _SubItemsState extends State<SubItems> {
   @override
   Widget build(BuildContext context) {
     print('SubItems');
+
     if (widget.isOpened != _isOpened) {
       _isOpened = widget.isOpened;
       _animated = false;
@@ -47,6 +50,9 @@ class _SubItemsState extends State<SubItems> {
 
     if (!_animated) {
       Future.delayed(const Duration(milliseconds: 100), () {
+        if (_isOpened) {
+          _searchYearsVehicleState.search();
+        }
         setState(
           () {
             if (_isOpened) {
@@ -77,20 +83,25 @@ class _SubItemsState extends State<SubItems> {
   }
 
   Widget _stateManagement({required SearchYearsVehicleTypeState state}) {
-    switch (state) {
-      case SearchYearsVehicleTypeState.initial:
-        _searchYearsVehicleState.search();
-        return _loading();
-      case SearchYearsVehicleTypeState.loading:
-        return _loading();
-      case SearchYearsVehicleTypeState.success:
-        return _success();
-      case SearchYearsVehicleTypeState.empty:
-        return _tryAgain(erro: false);
-      case SearchYearsVehicleTypeState.error:
-        return _tryAgain(erro: true);
-      default:
-        return _tryAgain(erro: true);
+    if (_isOpened) {
+      switch (state) {
+        case SearchYearsVehicleTypeState.initial:
+          return _loading();
+        case SearchYearsVehicleTypeState.loading:
+          return _loading();
+        case SearchYearsVehicleTypeState.success:
+          return _success();
+        case SearchYearsVehicleTypeState.empty:
+          return _tryAgain(erro: false);
+        case SearchYearsVehicleTypeState.error:
+          return _tryAgain(erro: true);
+        default:
+          return _tryAgain(erro: true);
+      }
+    } else {
+      return Container(
+        color: ColorsApp.red,
+      );
     }
   }
 

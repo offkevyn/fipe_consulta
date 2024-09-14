@@ -5,16 +5,17 @@ import '../../../../../../../shared/util/colors_app.dart';
 import '../../../../../../../shared/util/config_view_app.dart';
 import '../../../../../../../shared/util/icon_data_app.dart';
 import '../../../../../../../shared/widget/ink_well_custom/ink_well_custom.dart';
+import '../../../../../model/fipe_default_cls.dart';
 import 'sub_items.dart';
 
 class ItemList extends StatefulWidget {
-  final String title;
+  final FipeDefaultCls modelVehicle;
   final bool isFocused;
   final Function() onTap;
   final int? index;
 
   const ItemList({
-    required this.title,
+    required this.modelVehicle,
     this.isFocused = false,
     required this.onTap,
     this.index,
@@ -26,6 +27,7 @@ class ItemList extends StatefulWidget {
 }
 
 class _ItemListState extends State<ItemList> {
+  late FipeDefaultCls _modelVehicle;
   late String _title;
 
   late bool _withAnimation;
@@ -47,7 +49,8 @@ class _ItemListState extends State<ItemList> {
   void initState() {
     super.initState();
 
-    _title = widget.title;
+    _modelVehicle = widget.modelVehicle;
+    _title = _modelVehicle.name;
 
     _withAnimation = widget.index != null;
     _index = widget.index;
@@ -108,6 +111,7 @@ class _ItemListState extends State<ItemList> {
           _item(),
           _animated && _wasClicked
               ? SubItems(
+                  modelVehicle: _modelVehicle,
                   isOpened: _isOpened && _isFocused,
                 )
               : Container(),

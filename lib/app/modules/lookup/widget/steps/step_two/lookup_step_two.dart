@@ -123,7 +123,7 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
           FipeDefaultCls modelVehicle = listModelsVehicles[index - 1];
 
           return ItemList(
-            title: modelVehicle.name,
+            modelVehicle: modelVehicle,
             isFocused: _modelVehicleSelected == modelVehicle,
             index:
                 index - 1 < numAnimation && _startAnimation ? index - 1 : null,
