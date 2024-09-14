@@ -6,4 +6,5 @@ abstract class IconDataApp {
   static const IconData motorcycle = PhosphorIconsRegular.motorcycle;
 
   static const IconData speedometer = PhosphorIconsRegular.speedometer;
+  static const IconData gitCommit = PhosphorIconsRegular.gitCommit;
 }

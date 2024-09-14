@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../../../../../../shared/util/colors_app.dart';
+import '../../../../../../../shared/util/icon_data_app.dart';
 import '../../../../../../../shared/util/lottie_app.dart';
 import '../../../../../../../shared/widget/button_simple/button_simple.dart';
+import '../../../../../../../shared/widget/ink_well_custom/ink_well_custom.dart';
 import '../../../../../../../shared/widget/progress_custom/progress_custom.dart';
 import '../../../../../model/fipe_default_cls.dart';
 import '../../state/search_years_vehicle_state.dart';
@@ -160,13 +163,91 @@ class _SubItemsState extends State<SubItems> {
     List<FipeDefaultCls> listYearsVehicles =
         _searchYearsVehicleState.listYearsVehicles;
 
-    return ListView.builder(
-      itemCount: listYearsVehicles.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(listYearsVehicles[index].name),
-        );
-      },
+    return Container(
+      padding: const EdgeInsets.only(
+        top: 10,
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            flex: 11,
+            child: ListView.separated(
+              separatorBuilder: (context, index) {
+                return const SizedBox(height: 15);
+              },
+              itemCount: listYearsVehicles.length,
+              itemBuilder: (context, index) {
+                return _item(
+                  yearVehicle: listYearsVehicles[index],
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            height: 1.2,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: ColorsApp.primary,
+              borderRadius: BorderRadius.circular(50),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _item({required FipeDefaultCls yearVehicle}) {
+    return Align(
+      alignment: Alignment.topRight,
+      child: InkWellCustom(
+        onTap: () {
+          print('yearVehicle: ${yearVehicle.name}');
+        },
+        borderRadius: BorderRadius.circular(25),
+        colorMaterial: ColorsApp.primary,
+        colorInkWell: ColorsApp.primary2.withOpacity(0.5),
+        child: Container(
+          width: 190,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 10,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(25),
+            boxShadow: [
+              BoxShadow(
+                color: ColorsApp.black.withOpacity(0.1),
+                blurRadius: 5,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              const PhosphorIcon(
+                IconDataApp.gitCommit,
+                color: ColorsApp.secundary,
+                size: 22,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  yearVehicle.name,
+                  maxLines: 1,
+                  style: const TextStyle(
+                    color: ColorsApp.white,
+                    fontSize: 16.5,
+                    fontWeight: FontWeight.w500,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
