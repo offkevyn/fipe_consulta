@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../../../../shared/util/colors_app.dart';
+import '../../../../../../../shared/util/lottie_app.dart';
 import '../../../../../../../shared/widget/button_simple/button_simple.dart';
 import '../../../../../../../shared/widget/progress_custom/progress_custom.dart';
 import '../../../../../model/fipe_default_cls.dart';
@@ -99,8 +101,14 @@ class _SubItemsState extends State<SubItems> {
           return _tryAgain(erro: true);
       }
     } else {
-      return Container(
-        color: ColorsApp.red,
+      return Center(
+        child: SizedBox(
+          width: 300,
+          child: Lottie.asset(
+            LottieApp.bye,
+            fit: BoxFit.contain,
+          ),
+        ),
       );
     }
   }
