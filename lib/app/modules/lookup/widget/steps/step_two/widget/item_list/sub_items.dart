@@ -11,6 +11,7 @@ import '../../../../../../../shared/widget/ink_well_custom/ink_well_custom.dart'
 import '../../../../../../../shared/widget/progress_custom/progress_custom.dart';
 import '../../../../../model/fipe_default_cls.dart';
 import '../../state/search_years_vehicle_state.dart';
+import '../../util/vehicle_details_dialog/vehicle_details_dialog.dart';
 
 class SubItems extends StatefulWidget {
   final FipeDefaultCls modelVehicle;
@@ -202,7 +203,9 @@ class _SubItemsState extends State<SubItems> {
       alignment: Alignment.topRight,
       child: InkWellCustom(
         onTap: () {
-          print('yearVehicle: ${yearVehicle.name}');
+          VehicleDetailsDialog.show(
+            context: context,
+          );
         },
         borderRadius: BorderRadius.circular(25),
         colorMaterial: ColorsApp.primary,
