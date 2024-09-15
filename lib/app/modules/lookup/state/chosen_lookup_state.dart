@@ -14,14 +14,17 @@ class ChosenLookupState extends ChangeNotifier {
 class ChosenLookup {
   FipeDefaultCls brand;
   FipeDefaultCls model;
+  FipeDefaultCls year;
 
   ChosenLookup({
     required this.brand,
     required this.model,
+    required this.year,
   });
 
   static ChosenLookup get empty => ChosenLookup(
         brand: FipeDefaultCls.empty,
         model: FipeDefaultCls.empty,
+        year: FipeDefaultCls.empty,
       );
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../../../../shared/util/colors_app.dart';
+import '../../state/search_vehicle_state.dart';
 
 abstract class VehicleDetailsDialog {
   static Future<dynamic> show({
@@ -32,10 +34,22 @@ class _VehicleDetailsDialogContent extends StatefulWidget {
   const _VehicleDetailsDialogContent();
 
   @override
-  State<_VehicleDetailsDialogContent> createState() => _VehicleDetailsDialogContentState();
+  State<_VehicleDetailsDialogContent> createState() =>
+      _VehicleDetailsDialogContentState();
 }
 
-class _VehicleDetailsDialogContentState extends State<_VehicleDetailsDialogContent> {
+class _VehicleDetailsDialogContentState
+    extends State<_VehicleDetailsDialogContent> {
+  late SearchVehicleState _searchVehicleState;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _searchVehicleState = Modular.get();
+    _searchVehicleState.search();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

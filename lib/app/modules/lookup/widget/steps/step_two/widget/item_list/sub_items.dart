@@ -10,6 +10,7 @@ import '../../../../../../../shared/widget/button_simple/button_simple.dart';
 import '../../../../../../../shared/widget/ink_well_custom/ink_well_custom.dart';
 import '../../../../../../../shared/widget/progress_custom/progress_custom.dart';
 import '../../../../../model/fipe_default_cls.dart';
+import '../../../../../state/chosen_lookup_state.dart';
 import '../../state/search_years_vehicle_state.dart';
 import '../../util/vehicle_details_dialog/vehicle_details_dialog.dart';
 
@@ -29,6 +30,7 @@ class SubItems extends StatefulWidget {
 
 class _SubItemsState extends State<SubItems> {
   late final SearchYearsVehicleState _searchYearsVehicleState;
+  late final ChosenLookupState _chosenLookUpState;
 
   late double _height;
   late bool _isOpened;
@@ -39,6 +41,7 @@ class _SubItemsState extends State<SubItems> {
     super.initState();
 
     _searchYearsVehicleState = Modular.get();
+    _chosenLookUpState = Modular.get();
 
     _height = 0;
     _isOpened = widget.isOpened;
@@ -198,15 +201,19 @@ class _SubItemsState extends State<SubItems> {
     );
   }
 
+  void _onTapItem({required FipeDefaultCls yearVehicle}) {
+    _chosenLookUpState.chosenLookup.value.year = yearVehicle;
+
+    VehicleDetailsDialog.show(
+      context: context,
+    );
+  }
+
   Widget _item({required FipeDefaultCls yearVehicle}) {
     return Align(
       alignment: Alignment.topRight,
       child: InkWellCustom(
-        onTap: () {
-          VehicleDetailsDialog.show(
-            context: context,
-          );
-        },
+        onTap: () => _onTapItem(yearVehicle: yearVehicle),
         borderRadius: BorderRadius.circular(25),
         colorMaterial: ColorsApp.primary,
         colorInkWell: ColorsApp.primary2.withOpacity(0.5),

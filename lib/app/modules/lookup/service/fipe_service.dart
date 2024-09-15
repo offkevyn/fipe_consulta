@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../../../shared/http/http_url_util.dart';
 import '../model/fipe_default_cls.dart';
+import '../model/vehicle.dart';
 
 class FipeService {
   final Dio dio;
@@ -80,5 +81,32 @@ class FipeService {
     }
 
     return listYears;
+  }
+
+  Future<Vehicle> getVehicle({
+    required String vehicleType,
+    required String brandCod,
+    required String modelCod,
+    required String year,
+  }) async {
+    Vehicle vehicle = Vehicle.empty;
+
+    var response = await dio.get<Map<String, dynamic>>(
+        HttpUrlUtil.getVehicleUrl(
+          vehicleType: vehicleType,
+          brandCod: brandCod,
+          modelCod: modelCod,
+          year: year,
+        ),
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        }));
+
+    if (response.data != null) {
+      vehicle = Vehicle.fromMapApi(response.data!);
+    }
+
+    return vehicle;
   }
 }
