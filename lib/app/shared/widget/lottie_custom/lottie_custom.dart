@@ -7,10 +7,12 @@ import '../button_simple/button_simple.dart';
 class LottieCustom extends StatefulWidget {
   final LottieType lottieType;
   final void Function()? onPressed;
+  final double? width;
 
   const LottieCustom({
     required this.lottieType,
     this.onPressed,
+    this.width,
     super.key,
   });
 
@@ -39,6 +41,10 @@ class LottieCustomState extends State<LottieCustom> {
       height = MediaQuery.of(context).size.height;
       width = MediaQuery.of(context).size.width;
     });
+
+    if (widget.width != null) {
+      width = widget.width!;
+    }
 
     return SingleChildScrollView(
       child: Center(
