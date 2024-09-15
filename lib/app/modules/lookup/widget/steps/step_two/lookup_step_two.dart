@@ -22,7 +22,7 @@ class LookupStepTwo extends StatefulWidget {
 class _LookupStepTwoState extends State<LookupStepTwo> {
   late LookupStepState _lookupStepState;
   late ChosenLookupState _chosenLookupState;
-  late SearchModelsVehicleState _searchVehicleState;
+  late SearchModelsVehicleState _searchModelsVehicleState;
 
   late bool _startAnimation;
 
@@ -34,8 +34,8 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
 
     _lookupStepState = Modular.get();
     _chosenLookupState = Modular.get();
-    _searchVehicleState = Modular.get();
-    _searchVehicleState.search();
+    _searchModelsVehicleState = Modular.get();
+    _searchModelsVehicleState.search();
 
     _startAnimation = true;
 
@@ -64,10 +64,10 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
         ),
         child: Center(
           child: AnimatedBuilder(
-            animation: _searchVehicleState.state,
+            animation: _searchModelsVehicleState.state,
             builder: (context, _) {
               return _stateManagement(
-                state: _searchVehicleState.state.value,
+                state: _searchModelsVehicleState.state.value,
               );
             },
           ),
@@ -104,7 +104,7 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
   Widget _success() {
     String brandName = _chosenLookupState.chosenLookup.value.brand.name;
     List<FipeDefaultCls> listModelsVehicles =
-        _searchVehicleState.listModelsVehicles;
+        _searchModelsVehicleState.listModelsVehicles;
 
     int numAnimation = MediaQuery.of(context).size.height ~/ 75;
 
@@ -171,6 +171,6 @@ class _LookupStepTwoState extends State<LookupStepTwo> {
   }
 
   void _refresh() {
-    _searchVehicleState.refresh();
+    _searchModelsVehicleState.refresh();
   }
 }
