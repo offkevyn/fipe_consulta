@@ -41,6 +41,13 @@ dependencies:
   package_info_plus: ^5.0.1
   animated_custom_dropdown: ^3.1.1
   dio: ^5.6.0
+  flutter_native_splash: ^2.3.11
+
+flutter_native_splash:
+  color: "#26143e"
+  image: "assets/img/app/logo_app_transparent.png"
+  android: true
+  ios: true
 
 
 dev_dependencies:
