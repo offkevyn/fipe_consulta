@@ -50,8 +50,6 @@ class _SubItemsState extends State<SubItems> {
 
   @override
   Widget build(BuildContext context) {
-    print('SubItems');
-
     if (widget.isOpened != _isOpened) {
       _isOpened = widget.isOpened;
       _animated = false;
