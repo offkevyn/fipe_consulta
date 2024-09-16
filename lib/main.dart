@@ -6,7 +6,7 @@ import 'app/app_widget.dart';
 import 'app/shared/util/routes_app.dart';
 
 void main(List<String> args) async {
-  Modular.setInitialRoute(RoutesApp.Home);
+  Modular.setInitialRoute(RoutesApp.Splash);
 
   runApp(
     ModularApp(
