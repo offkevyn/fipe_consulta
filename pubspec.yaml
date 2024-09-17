@@ -43,6 +43,7 @@ dependencies:
   dio: ^5.6.0
   flutter_native_splash: ^2.3.11
   flutter_launcher_icons: ^0.13.1
+  url_launcher: ^6.3.0
 
 flutter_native_splash:
   color: "#26143e"

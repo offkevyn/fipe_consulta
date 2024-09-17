@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../util/colors_app.dart';
 import '../../util/imgs_app.dart';
 import '../../util/methods/shared_dialog/shared_dialog.dart';
 import '../../util/routes_app.dart';
+import '../ink_well_custom/ink_well_custom.dart';
 
 class DrawerCustom extends StatefulWidget {
   const DrawerCustom({super.key});
@@ -16,6 +19,8 @@ class DrawerCustom extends StatefulWidget {
 
 class _DrawerCustomState extends State<DrawerCustom> {
   late List<_ItemDrawer> listItens;
+
+  late bool _erroLinkOffKevyn;
 
   @override
   void initState() {
@@ -44,7 +49,23 @@ class _DrawerCustomState extends State<DrawerCustom> {
       ),
     ];
 
+    _erroLinkOffKevyn = false;
+
     super.initState();
+  }
+
+  void _onTapLinkOffKevyn() async {
+    final Uri url = Uri.parse('https://github.com/offkevyn');
+
+    if (!await launchUrl(url)) {
+      setState(() {
+        _erroLinkOffKevyn = true;
+      });
+    } else {
+      setState(() {
+        _erroLinkOffKevyn = false;
+      });
+    }
   }
 
   @override
@@ -81,24 +102,58 @@ class _DrawerCustomState extends State<DrawerCustom> {
               );
             },
           ),
-          RichText(
-            text: const TextSpan(
-              text: 'Desenvolvido por: ',
-              style: TextStyle(
-                fontSize: 12,
-                color: ColorsApp.white,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: 'offKevyn',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: ColorsApp.white,
-                    fontWeight: FontWeight.w500,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWellCustom(
+                onTap: _onTapLinkOffKevyn,
+                colorMaterial: Colors.transparent,
+                colorInkWell: ColorsApp.primary2.withOpacity(0.5),
+                child: const Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'offKevyn',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: ColorsApp.white,
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.underline,
+                          decorationColor: ColorsApp.white,
+                        ),
+                      ),
+                      SizedBox(width: 1),
+                      PhosphorIcon(
+                        PhosphorIconsRegular.link,
+                        color: ColorsApp.white,
+                        size: 15,
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 15),
+              const Text(
+                '© 2024',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: ColorsApp.white,
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              if (_erroLinkOffKevyn)
+                const Text(
+                  'Erro ao abrir o link',
+                  style: TextStyle(
+                    color: ColorsApp.red,
+                    fontSize: 12,
+                  ),
+                ),
+            ],
           ),
           Expanded(
             child: ListView.separated(
