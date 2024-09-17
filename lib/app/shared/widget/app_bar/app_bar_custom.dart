@@ -9,10 +9,12 @@ import 'app_bar_title.dart';
 class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool buttonPagePop;
+  final void Function()? onTapPop;
 
   const AppBarCustom({
     required this.title,
     this.buttonPagePop = false,
+    this.onTapPop,
     super.key,
   });
 
@@ -21,12 +23,19 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
     Widget buttonPagePopWidget = InkWellCustom(
       colorMaterial: Colors.transparent,
       colorInkWell: ColorsApp.primary.withOpacity(0.17),
-      onTap: () => Modular.to.pop(),
+      onTap: () {
+        if (onTapPop != null) {
+          onTapPop!();
+        } else {
+          Modular.to.pop();
+        }
+      },
       child: Container(
         padding: const EdgeInsets.only(left: 10),
         decoration: const BoxDecoration(color: Colors.transparent),
         child: const Icon(
           Icons.arrow_back_ios,
+          color: ColorsApp.secundary,
           size: 40,
         ),
       ),
