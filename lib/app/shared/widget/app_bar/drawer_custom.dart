@@ -24,11 +24,13 @@ class _DrawerCustomState extends State<DrawerCustom> {
 
   @override
   void initState() {
+    super.initState();
+
     listItens = [
       _ItemDrawer(
         name: 'Home',
-        icon: const Icon(
-          Icons.home_outlined,
+        icon: const PhosphorIcon(
+          PhosphorIconsRegular.houseLine,
           color: ColorsApp.secundary,
           size: 30,
         ),
@@ -38,8 +40,8 @@ class _DrawerCustomState extends State<DrawerCustom> {
       ),
       _ItemDrawer(
         name: 'Sair',
-        icon: const Icon(
-          Icons.door_front_door_outlined,
+        icon: const PhosphorIcon(
+          PhosphorIconsRegular.signOut,
           color: ColorsApp.secundary,
           size: 30,
         ),
@@ -50,8 +52,6 @@ class _DrawerCustomState extends State<DrawerCustom> {
     ];
 
     _erroLinkOffKevyn = false;
-
-    super.initState();
   }
 
   void _onTapLinkOffKevyn() async {
