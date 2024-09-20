@@ -44,6 +44,7 @@ dependencies:
   flutter_native_splash: ^2.3.11
   flutter_launcher_icons: ^0.13.1
   url_launcher: ^6.3.0
+  in_app_update: ^4.2.3
 
 flutter_native_splash:
   color: "#26143e"

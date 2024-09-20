@@ -20,9 +20,6 @@ class AppInitializationState extends ChangeNotifier {
     try {
       state.value = AppInitializationTypeState.loading;
 
-      currentStep.value = AppInitializationStep.loading_local_storage;
-      await Future.delayed(const Duration(seconds: 10));
-
       currentStep.value = AppInitializationStep.check_app_update;
       await _appInitializationController.checkAppUpdate();
 
@@ -45,7 +42,6 @@ enum AppInitializationTypeState {
 
 enum AppInitializationStep {
   initial,
-  loading_local_storage,
   check_app_update,
   finalizing,
 }
@@ -55,8 +51,6 @@ extension AppInitializationStepExtension on AppInitializationStep {
     switch (this) {
       case AppInitializationStep.initial:
         return 'Inicializando';
-      case AppInitializationStep.loading_local_storage:
-        return 'Carregando dados locais';
       case AppInitializationStep.check_app_update:
         return 'Verificando atualizações';
       case AppInitializationStep.finalizing:
