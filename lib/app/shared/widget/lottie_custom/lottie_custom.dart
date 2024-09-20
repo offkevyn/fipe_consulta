@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../util/colors_app.dart';
+import '../../util/lottie_app.dart';
 import '../button_simple/button_simple.dart';
 
 class LottieCustom extends StatefulWidget {
@@ -84,7 +85,7 @@ class LottieCustomState extends State<LottieCustom> {
           SizedBox(
             width: isPortrait ? width * 0.75 : width * 0.4,
             child: Lottie.asset(
-              'assets/lottie/empty.json',
+              LottieApp.empty,
               fit: BoxFit.contain,
             ),
           ),
@@ -102,7 +103,7 @@ class LottieCustomState extends State<LottieCustom> {
           SizedBox(
             width: isPortrait ? width * 0.75 : width * 0.4,
             child: Lottie.asset(
-              'assets/lottie/erro.json',
+              LottieApp.erro,
               fit: BoxFit.contain,
             ),
           ),
@@ -120,7 +121,7 @@ class LottieCustomState extends State<LottieCustom> {
           SizedBox(
             width: isPortrait ? width * 0.55 : width * 0.22,
             child: Lottie.asset(
-              'assets/lottie/loading.json',
+              LottieApp.loading,
               fit: BoxFit.contain,
             ),
           ),
