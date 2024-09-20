@@ -20,13 +20,11 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
-  late final AnimationController _animatioControllerSpeedometer;
   late final List<ItemHome> _itens;
 
   @override
   void initState() {
     super.initState();
-    _animatioControllerSpeedometer = AnimationController(vsync: this);
 
     _itens = [
       ItemHome(
@@ -53,13 +51,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         ),
       ),
     ];
-  }
-
-  @override
-  void dispose() {
-    _animatioControllerSpeedometer.dispose();
-
-    super.dispose();
   }
 
   @override
@@ -92,13 +83,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         height: 80,
                         child: Lottie.asset(
                           LottieApp.speedometer,
-                          controller: _animatioControllerSpeedometer,
-                          onLoaded: (composition) {
-                            _animatioControllerSpeedometer.duration =
-                                composition.duration;
-                            _animatioControllerSpeedometer.forward();
-                            _animatioControllerSpeedometer.repeat();
-                          },
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
