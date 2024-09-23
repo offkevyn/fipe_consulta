@@ -9,6 +9,7 @@ import '../../util/imgs_app.dart';
 import '../../util/methods/shared_dialog/shared_dialog.dart';
 import '../../util/routes_app.dart';
 import '../ink_well_custom/ink_well_custom.dart';
+import 'util/info_app_dialog/info_app_dialog.dart';
 
 class DrawerCustom extends StatefulWidget {
   const DrawerCustom({super.key});
@@ -46,6 +47,17 @@ class _DrawerCustomState extends State<DrawerCustom> {
           size: 30,
         ),
         onTap: () => SharedDialog.animationDialogModuleConstruction(
+          context: context,
+        ),
+      ),
+      _ItemDrawer(
+        name: 'Info app',
+        icon: const PhosphorIcon(
+          PhosphorIconsRegular.info,
+          color: ColorsApp.secundary,
+          size: 30,
+        ),
+        onTap: () => InfoAppDialog.show(
           context: context,
         ),
       ),
